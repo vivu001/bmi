@@ -32,7 +32,9 @@ class _InputPageState extends State<InputPage> {
                 child: ReusableCard(colour: Color(0xFFC7493A)),
               ),
               Expanded(
-                child: ReusableCard(colour: Color(0xFFC7493A)),
+                child: ReusableCard(
+                  colour: Colors.amber
+                ),
               ),
             ]),
           ),
@@ -45,7 +47,7 @@ class _InputPageState extends State<InputPage> {
 class ReusableCard extends StatelessWidget {
  Color colour;
 
- ReusableCard({this.colour});
+ ReusableCard({@required this.colour});
 
   @override
   Widget build(BuildContext context) {
