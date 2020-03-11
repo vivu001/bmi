@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-const Color iconColor = Color(0xFFFDFAFA);
+import 'constants.dart';
 
 class contentIcon extends StatelessWidget {
   final IconData icon;
@@ -13,12 +13,15 @@ class contentIcon extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Icon(this.icon, size: 85.0, color: iconColor),
+        Icon(this.icon, size: 85.0, color: kIconColor),
         SizedBox(height: 15.0),
         Text(this.content,
-            style: TextStyle(
-                fontSize: 12.0, color: iconColor, fontWeight: FontWeight.bold))
+            style: kTextLabelColor)
       ],
     );
   }
+}
+
+enum Gender {
+  MALE, FEMALE
 }
