@@ -1,8 +1,8 @@
+import 'package:bmi_calculator/result_page.dart';
 import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,6 +17,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Color maleColor = kCardColor;
   Color femaleColor = kCardColor;
+  Gender _currentGender = Gender.MALE;
   double _height = 165.0;
   double _weight = 50.0;
   int _age = 20;
@@ -35,7 +36,7 @@ class _InputPageState extends State<InputPage> {
                       cardChild: contentIcon(FontAwesomeIcons.mars, 'MALE'),
                       onPress: () {
                         setState(() {
-                          changeColor(Gender.MALE);
+                          chooseGender();
                         });
                       })),
               Expanded(
@@ -44,7 +45,7 @@ class _InputPageState extends State<InputPage> {
                       cardChild: contentIcon(FontAwesomeIcons.venus, 'FEMALE'),
                       onPress: () {
                         setState(() {
-                          changeColor(Gender.FEMALE);
+                          chooseGender(gender: Gender.FEMALE);
                         });
                       }))
             ]),
@@ -126,8 +127,20 @@ class _InputPageState extends State<InputPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
-                              IconButton(icon: minusIcon, onPressed: null),
-                              IconButton(icon: plusIcon, onPressed: null),
+                              RoundButton(
+                                  iconData: FontAwesomeIcons.minusCircle,
+                                  onPressed: () {
+                                    setState(() {
+                                      if (_weight > 1) _weight -= 0.5;
+                                    });
+                                  }),
+                              RoundButton(
+                                  iconData: FontAwesomeIcons.plusCircle,
+                                  onPressed: () {
+                                    setState(() {
+                                      if (_weight < 250) _weight += 0.5;
+                                    });
+                                  }),
                             ],
                           ),
                         ],
@@ -156,31 +169,82 @@ class _InputPageState extends State<InputPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
-                              IconButton(icon: minusIcon, onPressed: null),
-                              IconButton(icon: plusIcon, onPressed: null),
+                              RoundButton(
+                                  iconData: FontAwesomeIcons.minusCircle,
+                                  onPressed: () {
+                                    setState(() {
+                                      if (_age > 1) _age--;
+                                    });
+                                  }),
+                              RoundButton(
+                                  iconData: FontAwesomeIcons.plusCircle,
+                                  onPressed: () {
+                                    setState(() {
+                                      if (_age < 120) _age++;
+                                    });
+                                  }),
                             ],
                           ),
                         ],
                       ))),
             ]),
           ),
-          Container(
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: 80.0)
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ResultPage(bmiCalculate());
+              }));
+            },
+            child: Container(
+                child:
+                    Center(child: Text('CALCULATE', style: kTextLabelBottom)),
+                color: kBottomContainerColor,
+                margin: EdgeInsets.only(top: 10.0),
+                width: double.infinity,
+                height: 80.0),
+          ),
         ],
       ),
     );
   }
 
-  void changeColor(final Gender gender) {
-    if (gender == Gender.MALE) {
+  void chooseGender({final Gender gender}) {
+    if (gender == Gender.FEMALE) {
+      _currentGender = Gender.MALE;
+      maleColor = femaleColor;
+      femaleColor = kActiveCardColor;
+    } else {
+      _currentGender = Gender.FEMALE;
+      femaleColor = maleColor;
+      maleColor = kActiveCardColor;
+    }
+
+    /* if (gender == Gender.MALE) {
       femaleColor = maleColor;
       maleColor = kActiveCardColor;
     } else if (gender == Gender.FEMALE) {
       maleColor = femaleColor;
       femaleColor = kActiveCardColor;
-    }
+    }*/
+  }
+
+  double bmiCalculate() {
+    return _weight * 10000 / (_height * _height);
+  }
+}
+
+class RoundButton extends StatelessWidget {
+  final IconData iconData;
+  final Function onPressed;
+
+  RoundButton({@required this.iconData, @required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+        child: Icon(iconData, size: 45.0, color: kIconColor),
+        backgroundColor: kTransparent,
+        splashColor: kActiveTrackColor,
+        onPressed: onPressed);
   }
 }
