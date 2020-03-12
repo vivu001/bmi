@@ -1,13 +1,14 @@
-import 'package:bmi_calculator/result_page.dart';
-import 'package:bmi_calculator/reusable_card.dart';
+import 'package:bmi_calculator/components/content_icon.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
+import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'constants.dart';
-import 'content_icon.dart';
+import '../components/bottom_button.dart';
+import '../components/round_button.dart';
+import '../constants.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -189,20 +190,12 @@ class _InputPageState extends State<InputPage> {
                       ))),
             ]),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ResultPage(bmiCalculate());
-              }));
-            },
-            child: Container(
-                child:
-                    Center(child: Text('CALCULATE', style: kTextLabelBottom)),
-                color: kBottomContainerColor,
-                margin: EdgeInsets.only(top: 10.0),
-                width: double.infinity,
-                height: 80.0),
-          ),
+          BottomButton(
+              title: 'BMI Calculate',
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ResultPage()));
+              }),
         ],
       ),
     );
@@ -230,21 +223,5 @@ class _InputPageState extends State<InputPage> {
 
   double bmiCalculate() {
     return _weight * 10000 / (_height * _height);
-  }
-}
-
-class RoundButton extends StatelessWidget {
-  final IconData iconData;
-  final Function onPressed;
-
-  RoundButton({@required this.iconData, @required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-        child: Icon(iconData, size: 45.0, color: kIconColor),
-        backgroundColor: kTransparent,
-        splashColor: kActiveTrackColor,
-        onPressed: onPressed);
   }
 }
