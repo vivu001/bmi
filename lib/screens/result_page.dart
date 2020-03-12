@@ -24,18 +24,16 @@ class ResultPage extends StatelessWidget {
             child: ReusableCard(
               colour: kActiveCardColor,
               cardChild: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text('Normal', style: kResult),
-                        Text('Result', style: kBMIResult),
-                        Text('Advice', style: kTextLabelSlider),
-                      ],
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text('Normal', style: kResult),
+                      Text('Result', style: kBMIResult),
+                      Text('Advice', style: kTextLabelSlider),
+                    ],
                   ),
                 ],
               ),

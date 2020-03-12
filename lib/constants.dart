@@ -18,11 +18,11 @@ const TextStyle kTextLabelBottom =
     TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold, color: kIconColor);
 
 const TextStyle kResult = TextStyle(
-    fontSize: 40,
+    fontSize: 25,
     fontWeight: FontWeight.bold,
     color: Color(0xFF51F655));
 const TextStyle kBMIResult = TextStyle(
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: FontWeight.bold,
     fontStyle: FontStyle.italic,
     color: Color(0xFFF6EF2C));

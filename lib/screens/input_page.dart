@@ -220,8 +220,4 @@ class _InputPageState extends State<InputPage> {
       femaleColor = kActiveCardColor;
     }*/
   }
-
-  double bmiCalculate() {
-    return _weight * 10000 / (_height * _height);
-  }
 }
