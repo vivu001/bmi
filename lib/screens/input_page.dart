@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/Calculator.dart';
 import 'package:bmi_calculator/components/content_icon.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:bmi_calculator/screens/result_page.dart';
@@ -174,7 +175,7 @@ class _InputPageState extends State<InputPage> {
                                   iconData: FontAwesomeIcons.minusCircle,
                                   onPressed: () {
                                     setState(() {
-                                      if (_age > 1) _age--;
+                                      if (_age > 18) _age--;
                                     });
                                   }),
                               RoundButton(
@@ -191,10 +192,11 @@ class _InputPageState extends State<InputPage> {
             ]),
           ),
           BottomButton(
-              title: 'BMI Calculate',
+              title: 'BMI CALCULATE',
               onTap: () {
+                Calculator calc = Calculator(_weight, _height);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResultPage()));
+                    MaterialPageRoute(builder: (context) => ResultPage(calc)));
               }),
         ],
       ),
@@ -212,6 +214,7 @@ class _InputPageState extends State<InputPage> {
       maleColor = kActiveCardColor;
     }
 
+    // TODO: calculate BMI based on gender
     /* if (gender == Gender.MALE) {
       femaleColor = maleColor;
       maleColor = kActiveCardColor;

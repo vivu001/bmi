@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'constants.dart';
 import 'screens/input_page.dart';
 
 void main() => runApp(BMICalculator());
@@ -9,8 +10,8 @@ class BMICalculator extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Color(0xFFAE0009),
-        scaffoldBackgroundColor: Color(0xFFAE0009),
+        primaryColor: kBottomContainerColor,
+        scaffoldBackgroundColor: Color(0xFF844257),
         accentColor: Colors.amberAccent,
         textTheme: TextTheme(
           body1: TextStyle(color: Colors.white)

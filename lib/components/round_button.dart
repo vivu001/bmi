@@ -12,7 +12,7 @@ class RoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
         heroTag: null,
-        child: Icon(iconData, size: 45.0, color: kIconColor),
+        child: Icon(iconData, size: 37.0, color: kIconColor),
         backgroundColor: kTransparent,
         splashColor: kActiveTrackColor,
         onPressed: onPressed);

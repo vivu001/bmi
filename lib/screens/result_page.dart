@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/Calculator.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:bmi_calculator/constants.dart';
 import 'package:bmi_calculator/screens/input_page.dart';
@@ -6,6 +7,11 @@ import 'package:flutter/material.dart';
 import '../components/bottom_button.dart';
 
 class ResultPage extends StatelessWidget {
+
+  final Calculator calc;
+
+  ResultPage(this.calc);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,9 +36,15 @@ class ResultPage extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Normal', style: kResult),
-                      Text('Result', style: kBMIResult),
-                      Text('Advice', style: kTextLabelSlider),
+                      Text(calc.getResultAsEnum().toString().split('.').last, style: kResult),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(calc.calculateBMI().toStringAsFixed(1), style: kBMIResult),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(calc.getAdvice(), style: kTextLabelColor, textAlign: TextAlign.center,),
+                      ),
                     ],
                   ),
                 ],
@@ -40,7 +52,7 @@ class ResultPage extends StatelessWidget {
             ),
           ),
           BottomButton(
-              title: 'BMI Input',
+              title: 'BMI INPUT',
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => InputPage()));

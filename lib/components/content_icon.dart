@@ -14,7 +14,7 @@ class contentIcon extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Icon(this.icon, size: 85.0, color: kIconColor),
-        SizedBox(height: 15.0),
+        SizedBox(height: 10.0),
         Text(this.content,
             style: kTextLabelColor)
       ],
